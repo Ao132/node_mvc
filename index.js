@@ -1,10 +1,11 @@
-import express from "express";
-import { connectionDB } from "./db/connection.js";
-import userRouter from "./src/modules/user/user.routes.js";
 const app = express();
+import express from "express";
 import session from "express-session";
+import { connectionDB } from "./db/connection.js";
+import userRouter from "./src/qmodules/user/user.routes.js";
 
 import connectMongoDBSession from 'connect-mongodb-session';
+import messageRouter from "./src/modules/message/message.routes.js";
 const MongoDBStore = connectMongoDBSession(session);
 
 
@@ -26,7 +27,8 @@ var store = new MongoDBStore({
     })  
   )
 
-app.use(userRouter);
+app.use("/user",userRouter);
+app.use("/message",messageRouter);
 
 app.use("*", (req, res, next) => {
   return res.json({ msg: "404 Not Found" });
@@ -34,4 +36,5 @@ app.use("*", (req, res, next) => {
 connectionDB();
 
 app.listen(3000);
+
 

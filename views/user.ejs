@@ -7,10 +7,10 @@
     </a>
     <h3 class="py-2"><%= session.name %></h3>
     <div class="container w-50 m-auto">
-      <form action="" method="post">
+      <form action="/message/sendMsg/<%= session.userId %>" method="post">
         <textarea
           class="form-control"
-          name=""
+          name="msg"
           id=""
           cols="10"
           rows="9"
